@@ -1,28 +1,28 @@
 const express = require('express')
 const app = express()
 
-const posts =[
+const dockerCommands =[
     {
-        title:'post 1',
-        body :' post 1 body'
+        title:'Build command',
+        body :' docker build image-tag Dockerfile-path'
     },
     {
-        title:'post 2',
-        body :' post 2 body'
+        title:'Run command',
+        body :' docker run --name container-name image-rag'
     },
     {
-        title:'post 3',
-        body :' post 3 body'
+        title:'Run with port mapping',
+        body :'docker run --name container-name -p PORT_IN_HOST:PORT_IN_CONTAINER image-tag'
     },
     {
-        title:'post 4',
-        body :' post 4 body'
+        title:'Run with port mapping and volumes',
+        body :'docker run --name container-name -p PORT_IN_HOST:PORT_IN_CONTAINER -v abs-path-in-host:path-folder-in-container image-tag'
     },
 ]
 
-app.get('/posts',(req,res)=>{
+app.get('/commands',(req,res)=>{
 
-    res.json(posts)
+    res.json(dockerCommands)
 })
 
 app.listen(9090,()=>{
