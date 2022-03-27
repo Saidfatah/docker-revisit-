@@ -1,13 +1,28 @@
-import logo from './logo.svg';
+/* eslint-disable react-hooks/exhaustive-deps */
+import {useEffect, useState} from 'react'
 import './App.css';
 
 function App() {
+  const [commands,setCommands]=useState([])
+
+  useEffect(async ()=>{
+     const response  = await fetch('http://localhost:9090/commands',{
+       method:'GET'
+     })
+     const commandsR =await response.json()
+
+     setCommands(commandsR)
+  },[])
   return (
     <div className="App">
-      <header className="App-header"> docker revisit </header>
-       <h1>Commands </h1>
-       <p>run docker container with volumes set up and ports mapped </p>
-       <p>  docker run --name docker-revisit-container-volumes-on -p  3000:3000  -v /Users/saidfatah/Documents/learning/docker/docker-revisit/react-app/src:/app/src -v /node_modules  react-image-revsit</p>
+      <h1> docker revisit </h1>
+       <h2>Docker Commands </h2>
+       {
+         commands.map(command=><div>
+           <p>{command.title}</p>
+           <p>{command.body}</p>
+         </div>)
+       }
     </div>
   );
 }
