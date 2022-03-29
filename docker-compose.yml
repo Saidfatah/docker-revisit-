@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  react-app:
+    build: "./react-app"
+    container_name: react-app-container
+    ports:
+      - 3000:3000
+    volumes: 
+      - ./react-app/src:/app/src
+      - /app/node_modules
+  server : 
+    build: "./server"
+    container_name: server-container
+    ports:
+      - 9090:9090
+    volumes: 
+      - ./server:/server
+      - /server/node_modules  
